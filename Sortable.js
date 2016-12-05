@@ -12,6 +12,11 @@
 	}
 	else if (typeof module != "undefined" && typeof module.exports != "undefined") {
 		module.exports = factory();
+		// for electron we want it available in both window.Sortable namespace and through module.exports
+		if (window) {
+			/* jshint sub:true */
+			window["Sortable"] = factory();
+		}
 	}
 	else if (typeof Package !== "undefined") {
 		//noinspection JSUnresolvedVariable
